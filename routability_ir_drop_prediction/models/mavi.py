@@ -3,8 +3,11 @@
 import torch
 import torch.nn as nn
 
-from mmcv.cnn import constant_init, kaiming_init
-from mmcv.utils.parrots_wrapper import _BatchNorm
+#from mmcv.cnn import constant_init, kaiming_init
+#from mmcv.utils.parrots_wrapper import _BatchNorm
+
+from torch.nn.modules.batchnorm import _BatchNorm
+import torch.nn.init as init
 
 import torch
 import torch.nn as nn
@@ -188,13 +191,16 @@ class MAVI(nn.Module):
         elif pretrained is None:
             for m in self.modules():
                 if isinstance(m, (nn.BatchNorm2d, nn.GroupNorm)):
-                    constant_init(m.weight, 1)
-                    constant_init(m.bias, 0)
-
+                    #constant_init(m.weight, 1)
+                    #constant_init(m.bias, 0)
+                    init.constant_(m.weight, 1)
+                    init.constant_(m.bias, 0)
                 if isinstance(m, nn.Conv3d):
-                    kaiming_init(m)
+                    # kaiming_init(m)
+                    init.kaiming_normal_(m, a=0,mode='fan_out', nonlinearity='relu')
                 elif isinstance(m, _BatchNorm):
-                    constant_init(m, 1)
+                    #constant_init(m, 1)
+                    init.constant_(m, 1)
         else:
             raise TypeError(f'"pretrained" must be a str or None. '
                             f'But received {type(pretrained)}.')

@@ -1,0 +1,50 @@
+[project]
+name = "circuitnet"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "addict",
+    "certifi>=2026.2.25",
+    "charset-normalizer",
+    "idna",
+    "imageio",
+    "joblib",
+    "numpy >1.23.2",
+    "opencv-python",
+    "openmim>=0.3.9",
+    "packaging",
+    "pillow",
+    "psutil",
+    "pyparsing",
+    "pyutil",
+    "pywavelets",
+    "requests",
+    "scikit-image >0.19.3",
+    "scikit-learn >1.1.2",
+    "scipy",
+    "setuptools==70.0",
+    "threadpoolctl",
+    "tifffile",
+    "torch>=2.8.0",
+    "torchvision>=0.23.0",
+    "tqdm",
+    "typing-extensions",
+    "urllib3",
+    "wheel>=0.45.1",
+    "yapf",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+  { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]

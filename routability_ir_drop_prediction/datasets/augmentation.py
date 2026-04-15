@@ -1,6 +1,7 @@
 # Copyright 2022 CircuitNet. All rights reserved.
 
-import mmcv
+# import mmcv
+import torch
 import numpy as np
 
 class Flip:
@@ -20,10 +21,19 @@ class Flip:
         if flip:
             for key in self.keys:
                 if isinstance(results[key], list):
-                    for v in results[key]:
-                        mmcv.imflip_(v, self.direction)
+                    #for v in results[key]:
+                        # mmcv.imflip_(v, self.direction)
+                    flip_dims = {"horizontal": [-1], "vertical": [-2], "diagonal": [-2, -1]}
+                    for i, v in enumerate(results[key]):
+                        results[key][i] = torch.flip(v, flip_dims[self.direction])
                 else:
-                    mmcv.imflip_(results[key], self.direction)
+                    # mmcv.imflip_(results[key], self.direction)
+                    flip_dims = {"horizontal": [-1], "vertical": [-2], "diagonal": [-2, -1]}
+                    results[key] = torch.flip(
+                                torch.as_tensor(results[key]),
+                                    flip_dims[self.direction]
+                                    ).cpu().numpy()
+
 
         return results
 
