@@ -16,7 +16,7 @@ import csv
 from sklearn.metrics import accuracy_score, roc_curve, confusion_matrix
 from scipy.interpolate import make_interp_spline
 from functools import partial
-from mmcv import scandir
+# from mmcv import scandir
 
 from scipy.stats import wasserstein_distance
 from skimage.metrics import normalized_root_mse
@@ -264,7 +264,10 @@ def multi_process_score(out_name=None, threshold=0.0, label_path=None, save_path
     pool = mul.Pool(int(mul.cpu_count()*(1-psutil.cpu_percent(None)/100.0)))
     # pool = mul.Pool(1)
 
-    preds = scandir(os.path.join(save_path, 'test_result'), suffix='npy', recursive=True)
+    # preds = scandir(os.path.join(save_path, 'test_result'), suffix='npy', recursive=True)
+    preds = glob.glob(
+            os.path.join(save_path, 'test_result', '**', '*.npy'),
+            recursive=True)
     preds = [v for v in preds]
 
     if not os.path.exists(temp_path):
