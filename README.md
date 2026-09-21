@@ -1,5 +1,7 @@
 # CircuitNet: An Open-Source Dataset for Machine Learning Applications in Electronic Design Automation (EDA)
 
+> CC=clang uv sync --python 3.11.6
+
 ## Overview
 
 This repository is intended to hosts codes and demos for CircuitNet, we hope this codebase would be helpful for users to reproduce exiting methods. More information about the dataset can be accessed from our web page [https://circuitnet.github.io/](https://circuitnet.github.io/).
