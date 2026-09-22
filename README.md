@@ -4,7 +4,7 @@
 > 
 > python generate_training_set.py \
     --task congestion \
-    --data_path ../routability_features_decompressed \
+    --data_path ../ \
     --save_path ../routability_features_train
 > 
 > python train.py --task congestion_gpdl --save_path congestion_gpdl/
