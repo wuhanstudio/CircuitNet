@@ -12,7 +12,7 @@ dependencies = [
     "imageio",
     "joblib",
     "numpy >1.23.2",
-    "opencv-python",
+    "opencv-python>=4.10",
     "openmim>=0.3.9",
     "packaging",
     "pillow",
