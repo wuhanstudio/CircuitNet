@@ -36,7 +36,8 @@ class CongestionDataset(object):
 
         results = self.pipeline(results) if self.pipeline else results
         
-        feature =  results['feature'].transpose(2, 0, 1).astype(np.float32)
+        # Only use the second channel (RUDY) of the feature for congestion prediction
+        feature =  results['feature'][..., 1:2].transpose(2, 0, 1).astype(np.float32)
         label = results['label'].transpose(2, 0, 1).astype(np.float32)
 
         return feature, label, results['label_path']

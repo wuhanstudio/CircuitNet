@@ -18,6 +18,7 @@ class Parser(object):
 
         self.parser.add_argument('--max_iters', default=200000)
         self.parser.add_argument('--plot_roc', action='store_true')
+        self.parser.add_argument('--show', action='store_true')
         self.parser.add_argument('--arg_file', default=None)
         self.parser.add_argument('--cpu', action='store_true')
         self.get_remainder()
@@ -32,7 +33,7 @@ class Parser(object):
             self.parser.add_argument('--aug_pipeline', default=['Flip'])
             
             self.parser.add_argument('--model_type', default='GPDL')
-            self.parser.add_argument('--in_channels', default=3)
+            self.parser.add_argument('--in_channels', default=1)
             self.parser.add_argument('--out_channels', default=1)
             self.parser.add_argument('--lr', default=2e-4)
             self.parser.add_argument('--weight_decay', default=0)

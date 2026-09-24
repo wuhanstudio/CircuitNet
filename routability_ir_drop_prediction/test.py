@@ -6,6 +6,7 @@ import os
 import os.path as osp
 import json
 import numpy as np
+import matplotlib.pyplot as plt
 
 from tqdm import tqdm
 
@@ -49,6 +50,18 @@ def test():
                 input, target = feature.cuda(), label.cuda()
 
             prediction = model(input)
+            if arg_dict['show']:
+                figure, axes = plt.subplots(1, 2, figsize=(9, 4.5), tight_layout=True)
+                axes[0].imshow(target[0].detach().cpu().squeeze())
+                axes[0].set_title('Ground truth')
+                axes[1].imshow(prediction[0].detach().cpu().squeeze())
+                axes[1].set_title('Prediction')
+                for axis in axes:
+                    axis.axis('off')
+                figure.tight_layout()
+                plt.show()
+                plt.close(figure)
+
             for metric, metric_func in metrics.items():
                 if not metric_func(target.cpu(), prediction.squeeze(1).cpu()) == 1:
                     avg_metrics[metric] += metric_func(target.cpu(), prediction.squeeze(1).cpu())
